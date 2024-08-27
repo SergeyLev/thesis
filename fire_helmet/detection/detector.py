@@ -41,7 +41,10 @@ class Detector(threading.Thread):
             try:
                 frame = self.input.get(timeout=1)
                 result = self.detect(frame)
-                self.output.put(result)
+                try:
+                    self.output.put(result, timeout=1)
+                except queue.Full:
+                    continue
             except queue.Empty:
                 continue
 
