@@ -19,7 +19,7 @@ class Detector(threading.Thread):
         self._stop = threading.Event()
 
         # warmup
-        self.detect(np.zeros((640, 640)))
+        self.detect(np.zeros((self.img_size, self.img_size, 3), dtype=np.uint8))
 
     def detect(self, frame: NDArray[np.uint8]) -> List[ultralytics.engine.results.Results]:
         """
