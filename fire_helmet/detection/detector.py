@@ -39,7 +39,7 @@ class Detector(threading.Thread):
     def run(self):
         while not self._stop.is_set():
             try:
-                frame = self.input.get(timeout=1)
+                frame = self.input.get()
                 result = self.detect(frame)
                 self.output.put(result)
             except queue.Empty:
